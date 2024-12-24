@@ -53,7 +53,7 @@ public class BinPackState3 {
         int consumerCount = 1;
         // List<Partition> parts = new ArrayList<>(ArrivalRates.topicpartitions);
         List<Partition> parts = new ArrayList<>(ArrivalRates.topicpartitions);
-        float fraction = 0.9f;
+        float fraction = ConstantsAuto.fup; //0.9f;
         for (Partition partition : parts) {
 
             //TODO change this 200 to ArrivalRates.processingRate
@@ -112,9 +112,8 @@ public class BinPackState3 {
         log.info(" shall we down scale group {} ", "testgroup1");
         List<Consumer> consumers = new ArrayList<>();
         int consumerCount = 1;
-        //List<Partition> parts = new ArrayList<>(ArrivalRates.topicpartitions);
         List<Partition> parts = new ArrayList<>(ArrivalRates.topicpartitions);
-        double fractiondynamicAverageMaxConsumptionRate = ArrivalRates.processingRate * 0.2;
+        double fractiondynamicAverageMaxConsumptionRate = ArrivalRates.processingRate * ConstantsAuto.fdown; //0.2;
         for (Partition partition : parts) {
             if (partition.getLag() > fractiondynamicAverageMaxConsumptionRate * wsla) {
                 log.info("Since partition {} has lag {} higher than consumer capacity times wsla {}" +
@@ -170,16 +169,7 @@ public class BinPackState3 {
     }
 
 
-  /*  private static  boolean assignmentViolatesTheSLA() {
-        for (Consumer cons : currentAssignment) {
-            if (cons.getRemainingLagCapacity() <  (long) (wsla*200*.9f)||
-                    cons.getRemainingArrivalCapacity() < 200f*0.9f){
-                return true;
-            }
-        }
-        return false;
-    }
-*/
+
 
 
     private static boolean assignmentViolatesTheSLA2() {
