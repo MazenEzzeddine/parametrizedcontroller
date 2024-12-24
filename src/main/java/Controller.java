@@ -18,7 +18,6 @@ public class Controller implements Runnable {
         ConstantsAuto.init();
         ConstantsAuto.printParameters();
         ConstantsAuto.initPrometheusQueries();
-
         Lag.readEnvAndCrateAdminClient();
 
 
@@ -31,13 +30,11 @@ public class Controller implements Runnable {
             Lag.getCommittedLatestOffsetsAndLag();
             log.info("--------------------");
             log.info("--------------------");
-
-
             if(ArrivalRates.processingRate != 0) {
                 scaleLogicTail3();
             }
 
-            log.info("Sleeping for 1 seconds");
+            log.info("Sleeping for {} seconds", ConstantsAuto.decisionInterval);
             log.info("******************************************");
             log.info("******************************************");
             Thread.sleep(ConstantsAuto.decisionInterval);
@@ -48,33 +45,6 @@ public class Controller implements Runnable {
 
 
 
-
-
-   /* private static void scaleLogicTail() throws InterruptedException {
-        if  (Duration.between(BinPackLag2.LastUpScaleDecision, Instant.now()).getSeconds() >3) {
-            BinPackState2.scaleAsPerBinPack();
-            if (BinPackState2.action.equals("up") || BinPackState2.action.equals("down") || BinPackState2.action.equals("REASS") ) {
-                BinPackLag2.scaleAsPerBinPack();
-            }
-        } else {
-            log.info("No scale group 1 cooldown");
-        }
-    }*/
-
-
-/*
-    private static void scaleLogicTail2() throws InterruptedException, ExecutionException {
-        if (Lag.queryConsumerGroup() != BinPackState2.size) {
-            log.info("no action, previous action is not seen yet");
-            return;
-        }
-        BinPackState2.scaleAsPerBinPack();
-        if (BinPackState2.action.equals("up") || BinPackState2.action.equals("down")
-                || BinPackState2.action.equals("REASS")) {
-            BinPackLag2.scaleAsPerBinPack();
-        }
-    }
-*/
 
 
 

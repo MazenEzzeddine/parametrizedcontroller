@@ -12,7 +12,7 @@ class ConstantsAuto {
      public static String[] partitionsarrivals;
      public static String[] partitionsLag;
 
-    public  static String processingQuery;
+     public  static String processingQuery;
 
 
     public static String  topic;
@@ -91,12 +91,10 @@ class ConstantsAuto {
          System.out.println("WSLA " + wsla);
          System.out.println("REB_TIME " + rebtime);
          System.out.println("CONSUMER_GROUP " + consumergroup);
+         System.out.println("TOPIC  " + topic);
          System.out.println("FUP " + fup);
          System.out.println("FDOWN " + fdown);
          System.out.println("WARMUP_TIME " + WarmupTime);
-
-
-
 
      }
 }
