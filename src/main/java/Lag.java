@@ -77,4 +77,10 @@ public class Lag {
         return state;
     }
 
+
+    //TODO get all consumers groups and if the target consumer group is ! availble yet, do not call for lag
+    //TODO otherwise you will end up with a NULLPTREXCEPTION, can not get a lag for non existing CG...
+
+
+
 }
