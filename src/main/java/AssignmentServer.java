@@ -80,7 +80,6 @@ public class AssignmentServer implements Runnable {
             responseObserver.onCompleted();
             log.info("Sent Assignment to client");
 
-
         }
     }
 

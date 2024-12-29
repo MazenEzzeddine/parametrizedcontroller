@@ -40,26 +40,21 @@ class ConstantsAuto {
          fup= Float.parseFloat(System.getenv("FUP"));
          fdown= Float.parseFloat(System.getenv("FDOWN"));
          WarmupTime = Long.parseLong(System.getenv("WARMUP_TIME"));
-
-
          partitionsarrivals = new String[nbpartitions];
-
          partitionsLag = new String[nbpartitions];
-
      }
 
 
     public static  void initPrometheusQueries() {
          int rate;
 
-         if( decisionInterval <= 20000)
+         if( decisionInterval <= 5000)
          {
-             rate = 20;
+             rate = 5;
          }
          else {
              rate = (int) (decisionInterval/1000);
          }
-
 
          for (int i = 0; i < nbpartitions; i++) {
              partitionsarrivals[i] = "http://prometheus-operated:9090/api/v1/query?" +
@@ -73,7 +68,6 @@ class ConstantsAuto {
                      "kafka_consumergroup_lag%7Bconsumergroup=%22testgroup1%22,topic=%22testtopic1%22,partition=%22"+
                      i+"%22,namespace=%22default%22%7D";
          }
-
 
       processingQuery   = "http://prometheus-operated:9090/api/v1/query?query=" +
                  "1000/(avg(rate(events_latency_sum["+ rate+ "s])/rate(events_latency_count[" + rate +"s])))";

@@ -7,19 +7,12 @@ import java.util.concurrent.ExecutionException;
 public class Controller implements Runnable {
     private static final Logger log = LogManager.getLogger(Controller.class);
 
-
-
-
-
-
-
     private static void initialize() throws InterruptedException, ExecutionException {
 
         ConstantsAuto.init();
         ConstantsAuto.printParameters();
         ConstantsAuto.initPrometheusQueries();
         Lag.readEnvAndCrateAdminClient();
-
 
         log.info("Warming  {}  minutes", ConstantsAuto.WarmupTime/(60*1000) );
         Thread.sleep(ConstantsAuto.WarmupTime);

@@ -20,7 +20,6 @@ public class Lag {
 
 
     public  static void readEnvAndCrateAdminClient() throws ExecutionException, InterruptedException {
-
         Properties props = new Properties();
         props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, ConstantsAuto.bootstrapservers);
         admin = AdminClient.create(props);
