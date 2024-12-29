@@ -42,7 +42,7 @@ public class BinPackLag3 {
 */
 
 
-
+//TODO find a solution for a single replica, this does not work...
     // ATTENTIOn to the case  for a single initial
     static {
         for (int i = 0; i < ConstantsAuto.nbpartitions; i++) {

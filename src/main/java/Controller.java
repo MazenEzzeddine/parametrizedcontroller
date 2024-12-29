@@ -3,6 +3,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Controller implements Runnable {
     private static final Logger log = LogManager.getLogger(Controller.class);
@@ -14,8 +15,16 @@ public class Controller implements Runnable {
         ConstantsAuto.initPrometheusQueries();
         Lag.readEnvAndCrateAdminClient();
 
+
+
+
         log.info("Warming  {}  minutes", ConstantsAuto.WarmupTime/(60*1000) );
         Thread.sleep(ConstantsAuto.WarmupTime);
+        while (! Lag.listGroupsAndCheck(ConstantsAuto.consumergroup)) {
+            System.out.println("consumer group ! found, sleeping 1 second");
+            Thread.sleep(1000);
+        }
+
         while (true) {
             log.info("Querying Prometheus");
           //  ArrivalProducer.callForArrivals();

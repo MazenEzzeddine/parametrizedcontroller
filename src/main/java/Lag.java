@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 public class Lag {
     private static final Logger log = LogManager.getLogger(Lag.class);
@@ -82,5 +83,15 @@ public class Lag {
     //TODO otherwise you will end up with a NULLPTREXCEPTION, can not get a lag for non existing CG...
 
 
+
+ public static boolean listGroupsAndCheck(String targetGroup) throws ExecutionException, InterruptedException {
+     List<String> groupIds = admin.listConsumerGroups().all().get().
+             stream().map(ConsumerGroupListing::groupId).collect(Collectors.toList());
+
+     System.out.println("current groups are : " +  groupIds);
+
+     return groupIds.contains(targetGroup);
+
+ }
 
 }
