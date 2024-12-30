@@ -31,6 +31,12 @@ public class Lag {
     public static void getCommittedLatestOffsetsAndLag() throws ExecutionException, InterruptedException {
         committedOffsets = admin.listConsumerGroupOffsets(ConstantsAuto.consumergroup)
                 .partitionsToOffsetAndMetadata().get();
+
+           if(committedOffsets == null) {
+            System.out.println("Lag can not be computed, sleeping 1 sec and retrying");
+            Thread.sleep(1000);
+            getCommittedLatestOffsetsAndLag();
+        }
         Map<TopicPartition, OffsetSpec> requestLatestOffsets = new HashMap<>();
         for (int i = 0; i < ConstantsAuto.nbpartitions; i++) {
             requestLatestOffsets.put(new TopicPartition(ConstantsAuto.topic, i), OffsetSpec.latest());
