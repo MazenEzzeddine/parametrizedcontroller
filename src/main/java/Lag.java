@@ -32,11 +32,29 @@ public class Lag {
         committedOffsets = admin.listConsumerGroupOffsets(ConstantsAuto.consumergroup)
                 .partitionsToOffsetAndMetadata().get();
 
-           if(committedOffsets == null) {
+         /*  if(committedOffsets == null) {
             System.out.println("Lag can not be computed, sleeping 1 sec and retrying");
             Thread.sleep(1000);
             getCommittedLatestOffsetsAndLag();
-        }
+            //TODO a return is needed? why ! do it with while?
+        }*/
+
+           //TODO  this is better, might reconsider
+        do {
+            committedOffsets = admin.listConsumerGroupOffsets(ConstantsAuto.consumergroup)
+                    .partitionsToOffsetAndMetadata().get();
+
+            if(committedOffsets == null) {
+                System.out.println("Lag can not be computed, sleeping 1 sec and retrying");
+                Thread.sleep(1000);
+            }
+
+        } while(committedOffsets==null);
+
+
+
+
+
         Map<TopicPartition, OffsetSpec> requestLatestOffsets = new HashMap<>();
         for (int i = 0; i < ConstantsAuto.nbpartitions; i++) {
             requestLatestOffsets.put(new TopicPartition(ConstantsAuto.topic, i), OffsetSpec.latest());
