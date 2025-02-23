@@ -27,7 +27,7 @@ public class Controller implements Runnable {
 
         while (true) {
             log.info("Querying Prometheus");
-          //  ArrivalProducer.callForArrivals();
+            //ArrivalProducer.callForArrivals();
             ArrivalRates.arrivalRateTopic1();
             Lag.getCommittedLatestOffsetsAndLag();
             log.info("--------------------");

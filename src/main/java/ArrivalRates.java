@@ -105,7 +105,7 @@ public class ArrivalRates {
 
 
 
-    private static void queryLatency()  {
+     static void queryLatency()  {
         List<URI> latencies = new ArrayList<>();
         try {
             latencies = Arrays.asList(

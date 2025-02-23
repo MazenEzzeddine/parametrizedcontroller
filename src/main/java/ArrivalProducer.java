@@ -9,15 +9,7 @@ import java.util.ArrayList;
 public class ArrivalProducer {
 
     private static final Logger log = LogManager.getLogger(ArrivalProducer.class);
-    static ArrayList<Partition> topicpartitions;
     static double totalArrivalrate;
-    static {
-        topicpartitions = new ArrayList<>();
-        for (int i = 0; i <= ConstantsAuto.nbpartitions; i++) {
-            topicpartitions.add(new Partition(i, 0, 0));
-
-        }
-    }
 
 
     public static void callForArrivals() {
@@ -35,10 +27,15 @@ public class ArrivalProducer {
         double partitionArrival = reply.getArrival() / ConstantsAuto.nbpartitions;
         log.info("Arrival into each partition is {}", partitionArrival);
         for (int i = 0; i < ConstantsAuto.nbpartitions; i++) {
-            topicpartitions.get(i).setArrivalRate(partitionArrival);
+           ArrivalRates.topicpartitions.get(i).setArrivalRate(partitionArrival);
         }
         managedChannel.shutdown();
+        ArrivalRates.queryLatency();
+
     }
+
+
+
 
 
 
