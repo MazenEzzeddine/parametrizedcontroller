@@ -13,7 +13,7 @@ public class ArrivalProducer {
     static double totalArrivalrate;
     static {
         topicpartitions = new ArrayList<>();
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= ConstantsAuto.nbpartitions; i++) {
             topicpartitions.add(new Partition(i, 0, 0));
 
         }
@@ -32,7 +32,7 @@ public class ArrivalProducer {
         ArrivalResponse reply = arrivalServiceBlockingStub.arrivalRate(request);
         log.info("Arrival from the producer is {}", reply);
         totalArrivalrate = reply.getArrival();
-        double partitionArrival = reply.getArrival() / 5.0;
+        double partitionArrival = reply.getArrival() / ConstantsAuto.nbpartitions;
         log.info("Arrival into each partition is {}", partitionArrival);
         for (int i = 0; i < 5; i++) {
             topicpartitions.get(i).setArrivalRate(partitionArrival);
