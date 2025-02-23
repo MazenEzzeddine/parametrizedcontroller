@@ -34,7 +34,7 @@ public class ArrivalProducer {
         totalArrivalrate = reply.getArrival();
         double partitionArrival = reply.getArrival() / ConstantsAuto.nbpartitions;
         log.info("Arrival into each partition is {}", partitionArrival);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ConstantsAuto.nbpartitions; i++) {
             topicpartitions.get(i).setArrivalRate(partitionArrival);
         }
         managedChannel.shutdown();
