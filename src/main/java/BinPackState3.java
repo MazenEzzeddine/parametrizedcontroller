@@ -10,7 +10,7 @@ import java.util.List;
 public class BinPackState3 {
     //TODO give fup and fdown as paramters to the functions.
     private static final Logger log = LogManager.getLogger(BinPackState3.class);
-    public static int size = ConstantsAuto.initialreplicas;//7;//15;//10;//10; // 5; //10;//1; //10;
+    public static int size = ConstantsAuto.initialreplicas;
     //0.5 WSLA is reached around 85 events/sec
     static double wsla = ConstantsAuto.wsla;
     static String action = "none";
